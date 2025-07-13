@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ajustes Calculadora</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+  <div class="contenedor">
+    <div class="encabezado">
+      <h1>Ajustes Calculadora</h1>
+    </div>
+
+    <div class="pestanas">
+      <button class="pestana activa" onclick="cambiarPestana(event, 'retencion')">Ajuste por Retención</button>
+      <button class="pestana" onclick="cambiarPestana(event, 'dias-sin-servicio')">Ajuste por Días sin Servicio</button>
+    </div>
+
+    <!-- Ajuste por Retención -->
+    <div id="retencion" class="contenido-pestana activa">
+      <div class="grupo-formulario">
+        <label for="saldo-pendiente">Saldo pendiente original ($)</label>
+        <input type="number" id="saldo-pendiente" placeholder="Ej: 30000" oninput="calcularRetencion()">
+        <p class="texto-ayuda">Acá poné el total que el cliente debe actualmente</p>
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="monto-objetivo">Monto objetivo deseado ($)</label>
+        <input type="number" id="monto-objetivo" placeholder="Ej: 20000" oninput="calcularRetencion()">
+        <p class="texto-ayuda">Poné acá a cuánto querés dejar la factura</p>
+      </div>
+
+      <div class="resultado">
+        <div class="titulo-resultado">Monto para ingresar en el sistema de ajustes:</div>
+        <div class="valor-resultado" id="resultado-retencion">$0.00</div>
+        <button class="boton-copiar" onclick="copiarResultado('resultado-retencion', this)">Copiar resultado</button>
+      </div>
+
+      <div class="advertencia">
+        <div class="titulo-advertencia">Ojo con esto</div>
+        <p>No te olvides de avisarle al cliente que si tiene débito automático, se le va a cobrar el monto completo de la factura original. El ajuste queda como saldo a favor para el próximo mes. Si no quiere que pase esto, tiene que dar de baja el débito antes del vencimiento.</p>
+      </div>
+    </div>
+
+    <!-- Ajuste por Días sin Servicio -->
+    <div id="dias-sin-servicio" class="contenido-pestana">
+      <div class="grupo-formulario">
+        <label for="precio-mensual">Precio mensual del servicio ($)</label>
+        <input type="number" id="precio-mensual" placeholder="Ej: 9000" oninput="calcularDiasSinServicio()">
+        <p class="texto-ayuda">El valor completo que paga por mes</p>
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="dias">Días que no tuvo servicio</label>
+        <input type="number" id="dias" max="30" placeholder="Ej: 3" oninput="calcularDiasSinServicio()">
+        <p class="texto-ayuda">Los días que el cliente estuvo sin servicio</p>
+      </div>
+
+      <div class="resultado">
+        <div class="titulo-resultado">Monto para descontar por los días sin servicio:</div>
+        <div class="valor-resultado" id="resultado-dias">$0.00</div>
+        <button class="boton-copiar" onclick="copiarResultado('resultado-dias', this)">Copiar resultado</button>
+      </div>
+    </div>
+  </div>
+  <script src="/script.js"></script>
+  
+</body>
+</html>
